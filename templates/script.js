@@ -1,3 +1,5 @@
+let content = "";
+let search = "";
 document
     .getElementById("fileInput")
     .addEventListener("change", function (event) {
@@ -7,7 +9,7 @@ document
 
             // Define what happens when the file is successfully read
             reader.onload = function (e) {
-                const content = e.target.result; // The file content
+                content = e.target.result; // The file content
                 fetch("/text", {
                     method: "POST",
                     headers: {
@@ -30,17 +32,30 @@ document
     });
 
 document.getElementById("search-btn").addEventListener("click", (event) => {
-    let content = document.getElementById("search-text").value;
+     search = document.getElementById("search-text").value;
     fetch("/search", {
         method: "POST",
         headers: {
             "Content-Type": "application/json", // Set the content type to JSON
         },
         body: JSON.stringify({
-            text: content, // Send the file content as JSON
+            text: search, // Send the file content as JSON
         }),
     })
         .then((response) => response.json()) // Assuming the server responds with JSON
-        .then((data) => console.log(data))
+        .then((data) => {
+            console.log(data);
+            updateState(data);
+        })
         .catch((error) => console.error("Error:", error));
 });
+
+function updateState(data) {
+    let outputBox = document.getElementById("output-main");
+    outputBox.innerHTML = "";
+    let fragment = document.createDocumentFragment();
+    let h = document.createElement("h1");
+    h.textContent = `Total ${data.length-1} instances found`;
+    fragment.appendChild(h);
+    outputBox.appendChild(fragment);
+}

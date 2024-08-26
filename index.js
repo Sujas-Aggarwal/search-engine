@@ -11,16 +11,15 @@ app.post("/text", (req, res) => {
 app.post("/search", (req, res) => {
     fs.writeFileSync("search.txt", req.body.text);
     exec("main.exe input.txt search.txt", (err, out) => {
-        if (err){
+        if (err) {
             console.log(err);
-            return;
+            return res.json([]);
         }
         console.log(out);
         let outputIndex = out.split(" ");
         console.log(outputIndex);
+        return res.json(outputIndex);
     });
-    console.log(req.body.text);
-    return res.json("Text Saved Successfully");
 });
 app.listen(3000, () => {
     console.log("Server Working on Port 3000");

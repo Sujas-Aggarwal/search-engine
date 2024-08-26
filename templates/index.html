@@ -13,6 +13,7 @@
             }
             body {
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 min-height: 100vh;
@@ -37,7 +38,7 @@
             #search-text::placeholder {
                 text-align: center;
             }
-            #search-btn{
+            #search-btn {
                 height: 40px;
                 width: 100%;
                 font-weight: bold;
@@ -47,14 +48,24 @@
                 margin-top: 5px;
                 cursor: pointer;
             }
-            #search-btn:hover{
+            #search-btn:hover {
                 background-color: black;
                 color: white;
+            }
+            #output-main{
+                display: flex;
+                flex-direction: column;
+                width: 60%;
+                margin-top: 10vh;
+                padding: 20px;
+                border-radius: 10px;
+                border: 2px solid;
+                gap: 5px;
             }
         </style>
     </head>
     <body>
-        <div id="main-box">
+        <div id="main-box" >
             <h1 style="text-align: center">Search Engine</h1>
             <input
                 type="text"
@@ -64,9 +75,20 @@
                 autocapitalize="false"
                 autocomplete="false"
             />
-            <button id="search-btn" >Search</button>
-            <h2 style="text-align: center; margin-top: 30px;">Choose Text File to Search In</h2>
-            <input type="file" style="text-align: center; align-self: center;" name="" id="fileInput">
+            <button id="search-btn">Search</button>
+            <h2 style="text-align: center; margin-top: 30px">
+                Choose Text File to Search In
+            </h2>
+            <input
+                accept="text/*"
+                type="file"
+                style="text-align: center; align-self: center"
+                name=""
+                id="fileInput"
+            />
+        </div>
+        <div id="output-main" >
+
         </div>
         <script src="script.js"></script>
     </body>
